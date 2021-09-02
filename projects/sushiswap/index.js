@@ -55,6 +55,12 @@ async function bsc(timestamp, ethBlock, chainBlocks) {
   return calculateUniTvl(addr => `bsc:${addr}`, chainBlocks['bsc'], 'bsc', factory, 0, true);
 }
 
+async function celo(timestamp, ethBlock, chainBlocks) {
+  const block = await getBlock(timestamp, 'celo', chainBlocks);
+  console.log(block);
+  return calculateUniTvl(addr => `celo:${addr}`, block, 'celo', factory, 0, true);
+}
+
 async function harmony(timestamp, ethBlock, chainBlocks) {
   const block = await getBlock(timestamp, 'harmony', chainBlocks);
   const transform = await transformHarmonyAddress()
@@ -73,6 +79,9 @@ async function heco(timestamp, ethBlock, chainBlocks) {
 
 module.exports = {
   misrepresentedTokens: true,
+  celo: {
+    tvl: celo
+  },
   xdai: {
     tvl: xdai
   },
